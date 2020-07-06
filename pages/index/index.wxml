@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 数据展示 -->
+  <view class="content">
+    <block wx:if="{{activeNav === '未做事项'}}">
+      <view class="cott-add" catchtap="onAddTap">
+        <mp-icon icon="add" size="{{20}}" color="black"></mp-icon>
+      </view>
+      <view wx:for="{{contentData}}" wx:if="{{item.flag}}" wx:key="id" class="cott-add cott-item">
+        <checkbox-group bindchange="onCheckboxChange">
+          <checkbox class="cott-checkbox" value="{{item.id}}"></checkbox>
+        </checkbox-group>
+        <view class="ctot-right">
+          <view>
+            <text class="leave">{{ item.leave }}</text>
+            <text>{{ item.date }}</text>
+          </view>          
+          <text>{{ item.content }}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view wx:for="{{contentData}}" wx:if="{{!item.flag}}" wx:key="id" class="cott-add cott-item">
+        <checkbox-group bindchange="onCheckboxChange">
+          <checkbox class="cott-checkbox" value="{{item.id}}"></checkbox>
+        </checkbox-group>
+        <view class="ctot-right">
+          <view>
+            <text class="leave">{{ item.leave }}</text>
+            <text>{{ item.date }}</text>
+          </view>          
+          <text>{{ item.content }}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 导航栏 -->
+  <view class="nav">
+    <block wx:for="{{nav}}" wx:key="item">
+      <view class="nav-item {{item === activeNav ? 'nav-active' : ''}}" data-nav-name="{{item}}" catchtap="onNavTap">
+        {{ item }}
+      </view>
+    </block>
+  </view>
+  <!-- 添加弹窗 -->
+  <mp-dialog title="添加新的事项" show="{{dialogIsShow}}" bindbuttontap="onTapDialogButton" buttons="{{buttText}}">
+    <view>
+      <mp-form id="form" rules="{{rules}}">
+        <mp-cells title="紧急程度">
+          <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="radioChange">
+              <mp-checkbox wx:for="{{leaves}}" wx:key="value" label="{{item}}" value="{{item}}" checked="{{item === '正常' ? true : false}}"></mp-checkbox>
+          </mp-checkbox-group>
+        </mp-cells>
+        <mp-cells title="内容" prop="content">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入文本" model:value="{{content}}"/>
+                </view>
+            </view>
+          </view>
+        </mp-cells>
+        
+      </mp-form>
+    </view>
+  </mp-dialog>
+</view>
