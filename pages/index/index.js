@@ -101,7 +101,7 @@ Page({
         // leave: '正常',
         content: ''
       });
-    }else if(this.data.content === ''){
+    }else if(event.detail.index === 0 && this.data.content === ''){
       wx.showToast({
         title: '内容为必填项',
         icon: 'none'
