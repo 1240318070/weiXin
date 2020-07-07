@@ -67,6 +67,12 @@ Page({
       leave: event.detail.value
     });
   },
+  // input输入发生变化
+  onInputChange(event){
+    this.setData({
+      content: event.detail.value
+    });
+  },
   // 添加新事项
   onTapDialogButton(event){
     let data = {};
