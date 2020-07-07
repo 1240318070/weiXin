@@ -43,7 +43,7 @@
     </block>
   </view>
   <!-- 添加弹窗 -->
-  <mp-dialog title="添加新的事项" show="{{dialogIsShow}}" bindbuttontap="onTapDialogButton" buttons="{{buttText}}">
+  <mp-dialog title="添加新的事项" show="{{dialogIsShow}}" bindbuttontap="onTapDialogButton" buttons="{{buttText}}" wx:if="{{dialogIsShow}}">
     <view>
       <mp-form id="form" rules="{{rules}}">
         <mp-cells title="紧急程度">
